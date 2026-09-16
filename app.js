@@ -159,7 +159,41 @@
     $('#scenario-tabs').append(button);
   });
   if (data.scenarios.length) showScenario(0);
-  data.methodVideos.forEach(item => $('#method-videos').append(videoCard(item.title, item.detail, item)));
+  const runtimeTabs = [];
+  const runtimePanels = [];
+  function showRuntime(index) {
+    runtimePanels.forEach((panel, i) => {
+      const selected = i === index;
+      if (!selected) $$('video', panel).forEach(video => video.pause());
+      panel.hidden = !selected;
+      runtimeTabs[i].setAttribute('aria-selected', String(selected));
+      runtimeTabs[i].tabIndex = selected ? 0 : -1;
+    });
+    const panel = runtimePanels[index];
+    if (!panel.hasChildNodes()) mountVideo(panel, data.methodVideos[index]);
+  }
+  data.methodVideos.forEach((item, index) => {
+    const tab = document.createElement('button');
+    tab.type = 'button'; tab.id = `runtime-tab-${item.id}`;
+    tab.setAttribute('role', 'tab'); tab.textContent = item.title;
+    const panel = document.createElement('div');
+    panel.id = `runtime-panel-${item.id}`; panel.className = 'runtime-panel';
+    panel.setAttribute('role', 'tabpanel'); panel.setAttribute('aria-labelledby', tab.id);
+    tab.setAttribute('aria-controls', panel.id);
+    tab.addEventListener('click', () => showRuntime(index));
+    tab.addEventListener('keydown', event => {
+      let next;
+      if (event.key === 'ArrowRight') next = (index + 1) % runtimeTabs.length;
+      else if (event.key === 'ArrowLeft') next = (index + runtimeTabs.length - 1) % runtimeTabs.length;
+      else if (event.key === 'Home') next = 0;
+      else if (event.key === 'End') next = runtimeTabs.length - 1;
+      else return;
+      event.preventDefault(); showRuntime(next); runtimeTabs[next].focus();
+    });
+    runtimeTabs.push(tab); runtimePanels.push(panel);
+    $('#runtime-tabs').append(tab); $('#method-videos').append(panel);
+  });
+  if (runtimeTabs.length) showRuntime(0);
 
   const stages = [
     { kicker: 'INDEPENDENT PERCEPTION', title: 'Build a better scene context.', text: 'Camera and LiDAR checks identify disagreements in detected objects. Semantic validation helps assess missed obstacles and unsupported boxes, refining the context supplied to verification and recovery.', image: 'assets/figures/detection.svg', alt: 'Initial detection compared with LiDAR and VLM refinement', chips: ['Camera + LiDAR', 'BridgeDrive', 'Semantic validation'] },

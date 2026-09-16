@@ -75,3 +75,13 @@ pre{font-size:13px}
 
 /* Scenario recordings use square frames on desktop and mobile. */
 #scenario-videos .video-slot{aspect-ratio:1;min-height:0}
+
+/* One full-width runtime video per tab. */
+.runtime-tabs{display:flex;gap:8px;overflow-x:auto;padding:3px 3px 12px;margin-bottom:8px}
+.runtime-tabs button{flex:0 0 auto;border:1px solid var(--line);border-radius:7px;background:var(--surface);padding:10px 16px;font-size:14px;font-weight:550;white-space:nowrap;color:var(--muted)}
+.runtime-tabs button:hover{color:var(--blue);border-color:var(--blue)}
+.runtime-tabs button[aria-selected="true"]{color:var(--blue);border-color:var(--blue);background:var(--blue-soft)}
+.runtime-panel{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.runtime-panel[hidden]{display:none}
+.runtime-panel .video-slot{aspect-ratio:16/9;min-height:0}
+@media(max-width:520px){.runtime-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible}.runtime-tabs button{font-size:12px;line-height:1.4;padding:9px 6px;white-space:normal}}
