@@ -128,9 +128,9 @@
   $('#navsafe-body').innerHTML = data.navsafe.map(row => `<tr class="${row[0].includes('AutoAgent0') ? 'ours-row' : ''}"><th scope="row">${escapeHTML(row[0])}</th>${row.slice(1).map(value => `<td>${value === null ? '<span aria-label="Result pending">—</span>' : value.toFixed(2)}</td>`).join('')}</tr>`).join('');
 
   const comparisonLabels = [
-    { key: 'fail1', title: 'Fail 1', caption: '' },
-    { key: 'fail2', title: 'Fail 2', caption: '' },
-    { key: 'success', title: 'Success', caption: '' }
+    { key: 'fail1', title: 'End-to-end Method', caption: '' },
+    { key: 'fail2', title: 'Traditional Runtime', caption: '' },
+    { key: 'success', title: 'AutoAgent0 (Ours)', caption: '' }
   ];
   function videoCard(title, caption, item, ours = false) {
     const card = document.createElement('article');
@@ -198,18 +198,14 @@
   if (runtimeTabs.length) showRuntime(0);
 
   const stages = [
-    { kicker: 'INDEPENDENT PERCEPTION', title: 'Build a better scene context.', text: 'Camera and LiDAR checks identify disagreements in detected objects. Semantic validation helps assess missed obstacles and unsupported boxes, refining the context supplied to verification and recovery.', image: 'assets/figures/detection.svg', alt: 'Initial detection compared with LiDAR and VLM refinement', chips: ['Camera + LiDAR', 'BridgeDrive', 'Semantic validation'] },
-    { kicker: 'SHARED ADMISSION CRITERIA', title: 'Check the proposal before execution.', text: 'A PDMS-based verifier evaluates collision risk, drivable-area compliance, time to collision, lane keeping, and progress. Route-consistency and execution guards complement geometric checks.', image: 'assets/figures/framework.svg', alt: 'Nominal and recovery proposals checked by the shared rule-based verifier', chips: ['Collision', 'Drivable area', 'TTC', 'Progress'] },
-    { kicker: 'AGENTIC PARAMETER SEARCH', title: 'Turn a rejection into a new plan.', text: 'When no nominal proposal is admitted, the agent selects an action primitive and bounded parameters. Verifier feedback guides changes in lateral displacement, speed, or duration—or selection of a different primitive.', image: 'assets/figures/recovery.svg', alt: 'Recovery primitive selection and verifier-guided trajectory refinement', chips: ['Brake / creep', 'Lateral bypass', 'Reverse', 'Parameter search'] },
-    { kicker: 'OBSERVATION-CONDITIONED ADAPTATION', title: 'Keep recovering in a changing world.', text: 'New observations can motivate a revised maneuver during execution. Each replacement trajectory is verified before commitment. Nominal proposals are reassessed as the runtime works to restore regular driving.', image: 'assets/figures/figma-layout.svg', alt: 'Recovery execution with observation-conditioned adaptation', chips: ['Observe', 'Refine', 'Verify again', 'Return to nominal'] }
+    { kicker: 'REFINED SCENE CONTEXT', title: 'Determine when recovery is needed.', text: 'Camera–LiDAR cross-checks and vision-language reasoning refine the scene context used by the rule-based verifier. The verifier checks nominal trajectory proposals against this context using a PDMS-based score, route-consistency checks, and execution guards. Recovery is triggered only when no nominal proposal is admitted.', chips: ['Scene context refinement', 'Nominal trajectory verification', 'Recovery trigger'] },
+    { kicker: 'ACTION PRIMITIVE LIBRARY', title: 'Choose a maneuver for the situation.', text: 'Given the refined scene context and nominal rejection feedback, the agent selects a recovery primitive, such as braking, creeping, lateral bypass, or reversing. The choice accounts for local geometry and route requirements. In the illustrated scene, clear space to the front-left motivates an obstacle bypass.', chips: ['Brake / creep', 'Lateral bypass', 'Reverse'] },
+    { kicker: 'VERIFIER-GUIDED PARAMETER SEARCH', title: 'Refine a trajectory until it passes verification.', text: 'For the selected primitive, the agent searches bounded parameters such as lateral displacement, target speed, and execution duration to generate candidate trajectories. The shared verifier applies the same admission criteria used for nominal proposals. Rejection feedback guides parameter changes or primitive reselection; only an admitted trajectory is eligible for execution.', chips: ['Bounded parameter search', 'Shared verifier', 'Feedback-driven revision'] },
   ];
   function showStage(index) {
     const stage = stages[index];
     $('#method-kicker').textContent = stage.kicker; $('#method-title').textContent = stage.title;
-    $('#method-text').textContent = stage.text; $('#method-image').src = stage.image;
-    $('#method-image').alt = stage.alt;
-    $('#method-image-button').dataset.image = stage.image;
-    $('#method-image-button').dataset.caption = stage.title;
+    $('#method-text').textContent = stage.text;
     $('#method-chips').innerHTML = stage.chips.map(chip => `<span>${escapeHTML(chip)}</span>`).join('');
     $$('[data-step]').forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
   }
