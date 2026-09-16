@@ -89,3 +89,9 @@ pre{font-size:13px}
 /* Subtitles above the method diagrams. */
 .figure-title{font-size:22px;font-weight:650;line-height:1.3;letter-spacing:-.35px;margin-bottom:16px}
 @media(max-width:520px){.figure-title{font-size:19px;margin-bottom:12px}}
+
+/* Distinguish failed demonstrations while preserving method-label colors. */
+.video-outcome-fail{color:#b84a48}
+[data-theme="dark"] .video-outcome-fail{color:#f08c88}
+
+.video-outcome-success{color:var(--green)}

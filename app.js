@@ -128,14 +128,17 @@
   $('#navsafe-body').innerHTML = data.navsafe.map(row => `<tr class="${row[0].includes('AutoAgent0') ? 'ours-row' : ''}"><th scope="row">${escapeHTML(row[0])}</th>${row.slice(1).map(value => `<td>${value === null ? '<span aria-label="Result pending">—</span>' : value.toFixed(2)}</td>`).join('')}</tr>`).join('');
 
   const comparisonLabels = [
-    { key: 'fail1', title: 'End-to-end Method', caption: '' },
-    { key: 'fail2', title: 'Traditional Runtime', caption: '' },
-    { key: 'success', title: 'AutoAgent0 (Ours)', caption: '' }
+    { key: 'fail1', title: 'End-to-end Method - Fail', caption: '' },
+    { key: 'fail2', title: 'Traditional Runtime - Fail', caption: '' },
+    { key: 'success', title: 'AutoAgent0 (Ours) - Success', caption: '' }
   ];
   function videoCard(title, caption, item, ours = false) {
     const card = document.createElement('article');
     card.className = `video-card${ours ? ' ours-card' : ''}`;
-    card.innerHTML = `<h4 class="video-card-heading" style="margin:0"><span aria-hidden="true"></span>${escapeHTML(title)}</h4>`;
+    const heading = escapeHTML(title)
+      .replace(/ - Fail$/, ' - <span class="video-outcome-fail">Fail</span>')
+      .replace(/ - Success$/, ' - <span class="video-outcome-success">Success</span>');
+    card.innerHTML = `<h4 class="video-card-heading" style="margin:0"><span aria-hidden="true"></span><span>${heading}</span></h4>`;
     mountVideo(card, item);
     return card;
   }
