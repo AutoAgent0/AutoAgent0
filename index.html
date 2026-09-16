@@ -79,7 +79,7 @@
       </section>
       <div class="results-panel">
         <div class="panel-heading"><div><span class="overline">FAIL2DRIVE</span><h3>Performance Comparison</h3></div><span class="muted small">Higher is better ↑</span></div>
-        <div class="chart-controls"><div class="segmented" aria-label="Evaluation split"><button type="button" data-split="gen" aria-pressed="false">Generalization</button><button type="button" data-split="id" aria-pressed="false">In-distribution</button><button type="button" data-split="avg" aria-pressed="true">Average</button></div><label class="metric-select">Metric <select id="metric"><option value="0">Driving score</option><option value="1" selected>Success rate (%)</option><option value="2">Harmonic mean</option></select></label></div>
+        <div class="chart-controls"><div class="segmented" aria-label="Evaluation split"><button type="button" data-split="avg" aria-pressed="true">Average</button><button type="button" data-split="gen" aria-pressed="false">Generalization</button><button type="button" data-split="id" aria-pressed="false">In-distribution</button></div><label class="metric-select">Metric <select id="metric"><option value="1" selected>Success rate (%)</option><option value="0">Driving score</option><option value="2">Harmonic mean</option></select></label></div>
         <div class="chart-legend"><span><i class="legend-base"></i>Standalone expert</span><span><i class="legend-ours"></i>+ AutoAgent0</span></div>
         <div id="results-chart" class="results-chart" role="img" aria-label="Average success rate comparison"></div>
         <p class="chart-note" id="chart-note" aria-live="polite"></p>
