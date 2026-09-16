@@ -79,9 +79,9 @@
       </section>
       <div class="results-panel">
         <div class="panel-heading"><div><span class="overline">FAIL2DRIVE</span><h3>Performance Comparison</h3></div><span class="muted small">Higher is better ↑</span></div>
-        <div class="chart-controls"><div class="segmented" aria-label="Evaluation split"><button type="button" data-split="gen" aria-pressed="true">Generalization</button><button type="button" data-split="id" aria-pressed="false">In-distribution</button><button type="button" data-split="avg" aria-pressed="false">Average</button></div><label class="metric-select">Metric <select id="metric"><option value="0">Driving score</option><option value="1">Success rate (%)</option><option value="2">Harmonic mean</option></select></label></div>
+        <div class="chart-controls"><div class="segmented" aria-label="Evaluation split"><button type="button" data-split="gen" aria-pressed="false">Generalization</button><button type="button" data-split="id" aria-pressed="false">In-distribution</button><button type="button" data-split="avg" aria-pressed="true">Average</button></div><label class="metric-select">Metric <select id="metric"><option value="0">Driving score</option><option value="1" selected>Success rate (%)</option><option value="2">Harmonic mean</option></select></label></div>
         <div class="chart-legend"><span><i class="legend-base"></i>Standalone expert</span><span><i class="legend-ours"></i>+ AutoAgent0</span></div>
-        <div id="results-chart" class="results-chart" role="img" aria-label="Driving score comparison on generalization routes"></div>
+        <div id="results-chart" class="results-chart" role="img" aria-label="Average success rate comparison"></div>
         <p class="chart-note" id="chart-note" aria-live="polite"></p>
       </div>
       <p class="source-note">100 paired routes · 17 unseen long-tail scenario types · 200 routes total · mean over three matched repetitions.</p>
@@ -91,7 +91,7 @@
     <section id="demonstrations" class="section">
       <div class="section-heading"><h2 class="section-number">03 / CLOSED-LOOP DEMONSTRATIONS</h2></div>
       <div class="scenario-tabs" id="scenario-tabs" aria-label="Driving scenario"></div>
-      <div class="scenario-description" aria-live="polite"><span class="scenario-counter" id="scenario-counter">01 / 07</span><div><h3 id="scenario-title"></h3></div></div>
+      <div class="scenario-description" aria-live="polite"><span class="scenario-counter" id="scenario-counter">01 / 04</span><div><h3 id="scenario-title"></h3></div></div>
       <div class="comparison-grid" id="scenario-videos"></div>
       <div class="subsection-heading"><h3>Runtime Demonstrations</h3></div>
       <div class="comparison-grid" id="method-videos"></div>

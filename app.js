@@ -94,8 +94,8 @@
     else video.addEventListener('loadedmetadata', seekAndPlay, { once: true });
   }));
 
-  let currentSplit = 'gen';
-  let currentMetric = 0;
+  let currentSplit = 'avg';
+  let currentMetric = 1;
   const splitLabels = { gen: 'generalization', id: 'in-distribution', avg: 'average' };
   const metricLabels = ['driving score', 'success rate (%)', 'harmonic mean'];
   function drawChart() {
