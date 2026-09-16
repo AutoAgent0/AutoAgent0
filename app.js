@@ -40,13 +40,12 @@
     const src = safeURL(item.src);
     if (!src) { placeholder(slot, item); return; }
     const video = document.createElement('video');
-    video.controls = true; video.playsInline = true; video.preload = item.preload === 'none' ? 'none' : 'metadata';
+    video.controls = true; video.playsInline = true; video.preload = 'auto';
+    // Muted inline playback allows autoplay without a prior user gesture.
+    video.autoplay = true; video.defaultMuted = true; video.muted = true;
     video.setAttribute('aria-label', item.title);
     const poster = safeURL(item.poster); if (poster) video.poster = poster;
     video.addEventListener('error', () => placeholder(slot, item, true), { once: true });
-    video.addEventListener('play', () => {
-      $$('video').forEach(other => { if (other !== video) other.pause(); });
-    });
     // Captions are optional; set captions to a local .vtt path in content.js.
     if (safeURL(item.captions)) {
       const track = document.createElement('track');
@@ -171,6 +170,9 @@
     });
     const panel = runtimePanels[index];
     if (!panel.hasChildNodes()) mountVideo(panel, data.methodVideos[index]);
+    else $$('video', panel).forEach(video => {
+      video.play().catch(() => { /* Native controls remain available if playback is blocked. */ });
+    });
   }
   data.methodVideos.forEach((item, index) => {
     const tab = document.createElement('button');
