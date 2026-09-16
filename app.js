@@ -205,14 +205,32 @@
     { kicker: 'ACTION PRIMITIVE LIBRARY', title: 'Choose a maneuver for the situation.', text: 'Given the refined scene context and nominal rejection feedback, the agent selects a recovery primitive, such as braking, creeping, lateral bypass, or reversing. The choice accounts for local geometry and route requirements. In the illustrated scene, clear space to the front-left motivates an obstacle bypass.', chips: ['Brake / creep', 'Lateral bypass', 'Reverse'] },
     { kicker: 'VERIFIER-GUIDED PARAMETER SEARCH', title: 'Refine a trajectory until it passes verification.', text: 'For the selected primitive, the agent searches bounded parameters such as lateral displacement, target speed, and execution duration to generate candidate trajectories. The shared verifier applies the same admission criteria used for nominal proposals. Rejection feedback guides parameter changes or primitive reselection; only an admitted trajectory is eligible for execution.', chips: ['Bounded parameter search', 'Shared verifier', 'Feedback-driven revision'] },
   ];
+  const methodTabs = $$('.method-steps [role="tab"]');
+  const methodPanel = $('#method-panel');
   function showStage(index) {
     const stage = stages[index];
     $('#method-kicker').textContent = stage.kicker; $('#method-title').textContent = stage.title;
     $('#method-text').textContent = stage.text;
     $('#method-chips').innerHTML = stage.chips.map(chip => `<span>${escapeHTML(chip)}</span>`).join('');
-    $$('[data-step]').forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
+    methodTabs.forEach((tab, i) => {
+      const selected = i === index;
+      tab.setAttribute('aria-selected', String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+    });
+    methodPanel.setAttribute('aria-labelledby', methodTabs[index].id);
   }
-  $$('[data-step]').forEach(button => button.addEventListener('click', () => showStage(Number(button.dataset.step))));
+  methodTabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => showStage(index));
+    tab.addEventListener('keydown', event => {
+      let next;
+      if (event.key === 'ArrowRight') next = (index + 1) % methodTabs.length;
+      else if (event.key === 'ArrowLeft') next = (index + methodTabs.length - 1) % methodTabs.length;
+      else if (event.key === 'Home') next = 0;
+      else if (event.key === 'End') next = methodTabs.length - 1;
+      else return;
+      event.preventDefault(); showStage(next); methodTabs[next].focus();
+    });
+  });
   showStage(0);
 
   const dialog = $('#figure-dialog');

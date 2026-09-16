@@ -10,9 +10,9 @@
   <meta property="og:image" content="assets/figures/AutoAgent0_logo_clean.png">
   <title>AutoAgent0 | An Agentic Runtime for Safe Closed-loop Driving</title>
   <link rel="icon" href="assets/figures/AutoAgent0_logo_clean.png" type="image/png">
-  <link rel="stylesheet" href="styles.css">
-  <script src="content.js" defer></script>
-  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=ac82122374">
+  <script src="content.js?v=b111fa19f9" defer></script>
+  <script src="app.js?v=d073207ddf" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#abstract">Skip to content</a>
@@ -102,8 +102,8 @@
       <div class="section-heading"><h2 class="section-number">04 / METHOD</h2></div>
       <figure class="paper-figure" aria-labelledby="framework-figure-title"><h3 class="figure-title" id="framework-figure-title">AutoAgent0 Framework</h3><button type="button" class="zoomable" data-image="assets/figures/framework.svg" data-caption="AutoAgent0 runtime framework" aria-label="Enlarge AutoAgent0 framework"><img src="assets/figures/framework.svg" alt="AutoAgent0 architecture: environment observations, nominal planning, scene context refinement, a rule-based verifier, and recovery planning." width="1526" height="900" loading="lazy"><span class="zoom-hint">View figure ↗</span></button><figcaption><strong>The AutoAgent0 harness.</strong> Independent scene context supports a rule-based verifier. Nominal and recovery trajectories pass through the same admission checks before reaching the tracking controller.</figcaption></figure>
       <figure class="paper-figure" aria-labelledby="recovery-figure-title"><h3 class="figure-title" id="recovery-figure-title">Agentic Recovery Example</h3><button type="button" class="zoomable" data-image="assets/figures/recovery.svg" data-caption="Agentic recovery planning" aria-label="Enlarge agentic recovery planning"><img src="assets/figures/recovery.svg" alt="Recovery planning: nominal rejection triggers primitive selection and iterative parameter search using collision, progress, and feasibility feedback." width="870" height="440" loading="lazy"><span class="zoom-hint">View figure ↗</span></button></figure>
-      <div class="method-steps" aria-label="Explore recovery planning stages"><button type="button" data-step="0" aria-pressed="true"><span>01</span> Verification (Recovery Trigger)</button><button type="button" data-step="1" aria-pressed="false"><span>02</span> Action Proposer</button><button type="button" data-step="2" aria-pressed="false"><span>03</span> Planning Refinement</button></div>
-      <div class="method-detail" aria-live="polite"><div class="method-copy"><span class="overline" id="method-kicker"></span><h3 id="method-title"></h3><p id="method-text"></p><div class="method-chips" id="method-chips"></div></div></div>
+      <div class="method-steps" role="tablist" aria-label="Explore recovery planning stages"><button type="button" id="method-tab-0" role="tab" data-step="0" aria-controls="method-panel" aria-selected="true" tabindex="0"><span>01</span> Verification (Recovery Trigger)</button><button type="button" id="method-tab-1" role="tab" data-step="1" aria-controls="method-panel" aria-selected="false" tabindex="-1"><span>02</span> Action Proposer</button><button type="button" id="method-tab-2" role="tab" data-step="2" aria-controls="method-panel" aria-selected="false" tabindex="-1"><span>03</span> Planning Refinement</button></div>
+      <div class="method-detail" id="method-panel" role="tabpanel" aria-labelledby="method-tab-0" tabindex="0" aria-live="polite"><div class="method-copy"><span class="overline" id="method-kicker"></span><h3 id="method-title"></h3><p id="method-text"></p><div class="method-chips" id="method-chips"></div></div></div>
       <div class="recovery-rule"><span class="rule-label">EXECUTION RULE</span><div><span>Admitted nominal plan</span><b>→</b><strong>Execute expert trajectory</strong></div><div><span>No nominal plan admitted</span><b>→</b><strong>Search, refine & verify recovery</strong></div><p>If no recovery candidate is admitted before the next control decision, use conservative braking.</p></div>
     </section>
 
