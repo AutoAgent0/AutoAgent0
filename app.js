@@ -40,7 +40,7 @@
     const src = safeURL(item.src);
     if (!src) { placeholder(slot, item); return; }
     const video = document.createElement('video');
-    video.controls = true; video.playsInline = true; video.preload = 'metadata';
+    video.controls = true; video.playsInline = true; video.preload = item.preload === 'none' ? 'none' : 'metadata';
     video.setAttribute('aria-label', item.title);
     const poster = safeURL(item.poster); if (poster) video.poster = poster;
     video.addEventListener('error', () => placeholder(slot, item, true), { once: true });
@@ -129,9 +129,9 @@
   $('#navsafe-body').innerHTML = data.navsafe.map(row => `<tr class="${row[0].includes('AutoAgent0') ? 'ours-row' : ''}"><th scope="row">${escapeHTML(row[0])}</th>${row.slice(1).map(value => `<td>${value === null ? '<span aria-label="Result pending">—</span>' : value.toFixed(2)}</td>`).join('')}</tr>`).join('');
 
   const comparisonLabels = [
-    { key: 'expert', title: 'Standalone expert', caption: 'Nominal execution by the frozen driving policy.' },
-    { key: 'monitor', title: 'Conventional monitor', caption: 'A monitored baseline for the same driving episode.' },
-    { key: 'ours', title: '+ AutoAgent0', caption: 'Scene refinement, verification, and agentic recovery.' }
+    { key: 'fail1', title: 'Fail 1', caption: '' },
+    { key: 'fail2', title: 'Fail 2', caption: '' },
+    { key: 'success', title: 'Success', caption: '' }
   ];
   function videoCard(title, caption, item, ours = false) {
     const card = document.createElement('article');
@@ -149,7 +149,7 @@
     $('#scenario-videos').replaceChildren(...comparisonLabels.map(label => {
       const configured = scenario.videos[label.key];
       const item = typeof configured === 'string' ? { src: configured } : configured || {};
-      return videoCard(label.title, label.caption, { ...item, title: `${scenario.label} · ${label.title}` }, label.key === 'ours');
+      return videoCard(label.title, label.caption, { ...item, title: `${scenario.label} · ${label.title}` }, label.key === 'success');
     }));
   }
   data.scenarios.forEach((scenario, index) => {

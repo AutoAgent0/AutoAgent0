@@ -72,3 +72,6 @@ pre{font-size:13px}
 .section-heading .section-number{font-size:38px;font-weight:650;letter-spacing:-1.25px;line-height:1.2;margin:0;color:var(--blue)}
 @media(max-width:760px){.section-heading .section-number{font-size:30px;letter-spacing:-.9px}}
 @media(max-width:520px){.section-heading .section-number{font-size:28px}}
+
+/* Scenario recordings use square frames on desktop and mobile. */
+#scenario-videos .video-slot{aspect-ratio:1;min-height:0}
