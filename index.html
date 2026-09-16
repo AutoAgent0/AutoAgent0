@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fbfcfe">
+  <meta name="description" content="AutoAgent0 augments driving experts with independent scene assessment, rule-based trajectory verification, and feedback-driven recovery. Explore the method and closed-loop driving results.">
+  <meta property="og:title" content="AutoAgent0 · An Agentic Runtime for Safe Closed-loop Driving">
+  <meta property="og:description" content="AutoAgent0: An Agentic Runtime for Safe Closed-loop Driving.">
+  <meta property="og:image" content="assets/figures/framework.webp">
+  <title>AutoAgent0 | An Agentic Runtime for Safe Closed-loop Driving</title>
+  <link rel="icon" href="assets/figures/AutoAgent0_logo_clean.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="content.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#abstract">Skip to content</a>
+  <div class="reading-progress" aria-hidden="true"><span id="reading-progress"></span></div>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="AutoAgent0 home"><img src="assets/figures/AutoAgent0_logo_clean.png" width="34" height="30" alt=""><span>AutoAgent<span class="accent">0</span></span></a>
+    <div class="topbar-right"><span class="top-label">RESEARCH PROJECT</span><span class="top-divider"></span><button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch theme"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/></svg></button></div>
+  </header>
+  <aside class="contents" aria-label="Page contents">
+    <p>ON THIS PAGE</p>
+    <nav><a href="#abstract"><span>01</span> Overview</a><a href="#results"><span>02</span> Results</a><a href="#demonstrations"><span>03</span> Demonstrations</a><a href="#method"><span>04</span> Method</a><a href="#analysis"><span>05</span> Analysis</a><a href="#citation"><span>06</span> Citation</a></nav>
+  </aside>
+  <main id="top" class="page">
+    <section class="hero" aria-labelledby="project-title">
+      <h1 id="project-title"><img src="assets/figures/AutoAgent0_logo_clean.png" alt="AutoAgent0 robot car" width="90" height="78"><span>AutoAgent<span class="hero-zero">0</span></span></h1>
+      <p class="hero-subtitle">An Agentic Runtime for<br class="desktop-break"> Safe Closed-loop Driving</p>
+      <p class="authors" id="authors">Anonymous Authors</p>
+      <div class="hero-links">
+        <button class="button primary" id="paper-link" type="button" disabled><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3H6v18h12V7Z M14 3v5h4 M9 12h6 M9 16h6"/></svg> Paper</button>
+        <a class="button" href="#demonstrations"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3Z"/></svg> Demonstrations</a>
+        <a class="button" href="#citation"><span class="code-icon" aria-hidden="true">{ }</span> BibTeX</a>
+        <button class="button" id="code-link" type="button" disabled><span class="code-icon" aria-hidden="true">&lt;/&gt;</span> Code</button>
+      </div>
+      <div class="hero-media" id="overview-video"></div>
+      <div class="video-chapters" aria-label="Overview video chapters"><span>EXPLORE THE DEMO</span><button type="button" data-seek="0">00:00 <b>Failure</b></button><button type="button" data-seek="9">00:09 <b>Refinement</b></button><button type="button" data-seek="14">00:14 <b>Proposer</b></button><button type="button" data-seek="21">00:21 <b>Verification</b></button><button type="button" data-seek="35">00:35 <b>Execution</b></button><button type="button" data-seek="43">00:43 <b>Adaptation</b></button></div>
+    </section>
+
+    <section id="abstract" class="section">
+      <div class="section-heading"><span class="section-number">01 / OVERVIEW</span><h2>Abstract</h2></div>
+      <div class="abstract-layout"><div class="abstract-copy">
+        <p>Safe autonomous driving requires more than accurate planning at a single frame: it demands reliable closed-loop execution in dynamic environments. Accumulated errors, especially in unseen scenarios, can push a vehicle into states from which the same policy struggles to recover.</p>
+        <p>We introduce <strong>AutoAgent0</strong>, an agentic runtime and harness framework that augments existing driving experts with complementary detection skills, rule-based action verification, and feedback-driven recovery. An independent detection module constructs scene context, while a shared verifier assesses trajectory feasibility before execution.</p>
+        <p>When nominal trajectories become unreliable, <strong>Recovery Planning</strong> constructs alternative maneuvers from action primitives and iteratively refines them using verification feedback. Fail2Drive results show improved closed-loop robustness across three experts without retraining them.</p>
+      </div></div>
+    </section>
+
+    <section id="results" class="section">
+      <div class="section-heading"><span class="section-number">02 / EMPIRICAL RESULTS</span><h2>Empirical Results</h2></div>
+      <div class="stats"><article><span>LONG-TAIL SUCCESS RATE</span><strong>80.0<small>%</small></strong><p><b>+27.3 pp</b> over SparseDriveV2</p></article><article><span>AVERAGE SUCCESS RATE</span><strong>90.3<small>%</small></strong><p>BridgeDrive + AutoAgent0</p></article><article><span>DRIVING EXPERTS</span><strong>3<small> / 3</small></strong><p>Improved on both evaluation splits</p></article></div>
+      <section class="main-benchmark" id="table-1" aria-labelledby="table-1-title">
+        <div class="benchmark-heading"><span class="table-label">TABLE 1</span><h3 id="table-1-title">Benchmark Results on Fail2Drive</h3></div>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Table 1: complete Fail2Drive benchmark results">
+          <table class="benchmark-table">
+            <caption>DS: driving score; SR: success rate; HM: harmonic mean. Average is the arithmetic mean of both splits. Parentheses show absolute improvements over each standalone expert.</caption>
+            <thead><tr><th rowspan="2" scope="col">Method</th><th colspan="2" scope="colgroup">Inputs</th><th colspan="3" scope="colgroup">In-Distribution</th><th colspan="3" scope="colgroup">Generalization</th><th colspan="3" scope="colgroup" class="average-group">Average</th></tr><tr><th scope="col">RGB</th><th scope="col">LiDAR</th><th scope="col">DS &uarr;</th><th scope="col">SR (%) &uarr;</th><th scope="col">HM &uarr;</th><th scope="col">DS &uarr;</th><th scope="col">SR (%) &uarr;</th><th scope="col">HM &uarr;</th><th scope="col">DS &uarr;</th><th scope="col">SR (%) &uarr;</th><th scope="col">HM &uarr;</th></tr></thead>
+            <tbody id="benchmark-body">
+            <tr class=""><th scope="row">TCP</th><td class="sensor-cell" aria-label="RGB input: yes">&#10003;</td><td class="sensor-cell" aria-label="LiDAR input: no">&mdash;</td><td>24.7</td><td>39.1</td><td>30.3</td><td>24.5</td><td>31.4</td><td>27.5</td><td class="average-cell">24.6</td><td class="average-cell">35.3</td><td class="average-cell">28.9</td></tr>
+            <tr class=""><th scope="row">Orion</th><td class="sensor-cell" aria-label="RGB input: yes">&#10003;</td><td class="sensor-cell" aria-label="LiDAR input: no">&mdash;</td><td>53.0</td><td>52.0</td><td>52.5</td><td>51.2</td><td>46.0</td><td>48.5</td><td class="average-cell">52.1</td><td class="average-cell">49.0</td><td class="average-cell">50.5</td></tr>
+            <tr class=""><th scope="row">HiP-AD</th><td class="sensor-cell" aria-label="RGB input: yes">&#10003;</td><td class="sensor-cell" aria-label="LiDAR input: no">&mdash;</td><td>74.1</td><td>70.7</td><td>72.4</td><td>67.1</td><td>56.7</td><td>61.5</td><td class="average-cell">70.6</td><td class="average-cell">63.7</td><td class="average-cell">67.0</td></tr>
+            <tr class=""><th scope="row">SimLingo</th><td class="sensor-cell" aria-label="RGB input: yes">&#10003;</td><td class="sensor-cell" aria-label="LiDAR input: no">&mdash;</td><td>82.6</td><td>79.3</td><td>80.9</td><td>71.7</td><td>55.0</td><td>62.2</td><td class="average-cell">77.2</td><td class="average-cell">67.2</td><td class="average-cell">71.6</td></tr>
+            <tr class=""><th scope="row">AlignDrive</th><td class="sensor-cell" aria-label="RGB input: yes">&#10003;</td><td class="sensor-cell" aria-label="LiDAR input: no">&mdash;</td><td>74.7</td><td>75.7</td><td>75.2</td><td>68.6</td><td>62.7</td><td>65.5</td><td class="average-cell">71.7</td><td class="average-cell">69.2</td><td class="average-cell">70.4</td></tr>
+            <tr class=""><th scope="row">BevAD</th><td class="sensor-cell" aria-label="RGB input: yes">&#10003;</td><td class="sensor-cell" aria-label="LiDAR input: no">&mdash;</td><td>87.4</td><td>83.3</td><td>85.3</td><td>82.3</td><td>68.7</td><td>74.9</td><td class="average-cell">84.9</td><td class="average-cell">76.0</td><td class="average-cell">80.1</td></tr>
+            <tr class=""><th scope="row">TF++</th><td class="sensor-cell" aria-label="RGB input: yes">&#10003;</td><td class="sensor-cell" aria-label="LiDAR input: yes">&#10003;</td><td>83.3</td><td>78.5</td><td>80.8</td><td>75.4</td><td>61.1</td><td>67.5</td><td class="average-cell">79.4</td><td class="average-cell">69.8</td><td class="average-cell">74.2</td></tr>
+            <tr class=""><th scope="row">TFv6</th><td class="sensor-cell" aria-label="RGB input: yes">&#10003;</td><td class="sensor-cell" aria-label="LiDAR input: yes">&#10003;</td><td>90.2</td><td>93.3</td><td>91.7</td><td>79.5</td><td>70.7</td><td>74.8</td><td class="average-cell">84.9</td><td class="average-cell">82.0</td><td class="average-cell">83.3</td></tr>
+            <tr class="expert-row"><th scope="row">UniAD</th><td class="sensor-cell" aria-label="RGB input: yes">&#10003;</td><td class="sensor-cell" aria-label="LiDAR input: no">&mdash;</td><td>47.5</td><td>36.3</td><td>41.2</td><td>44.0</td><td>27.6</td><td>33.9</td><td class="average-cell">45.8</td><td class="average-cell">32.0</td><td class="average-cell">37.6</td></tr>
+            <tr class="ours-row"><th scope="row">UniAD + AutoAgent0</th><td class="sensor-cell" aria-label="RGB input: yes">&#10003;</td><td class="sensor-cell" aria-label="LiDAR input: yes">&#10003;</td><td>68.4</td><td>69.0</td><td>68.7</td><td>69.2</td><td>69.0</td><td>69.1</td><td class="average-cell">68.8<span class="table-gain">(+23.0)</span></td><td class="average-cell">69.0<span class="table-gain">(+37.0)</span></td><td class="average-cell">68.9<span class="table-gain">(+31.3)</span></td></tr>
+            <tr class="expert-row"><th scope="row">SparseDriveV2</th><td class="sensor-cell" aria-label="RGB input: yes">&#10003;</td><td class="sensor-cell" aria-label="LiDAR input: yes">&#10003;</td><td>70.0</td><td>74.0</td><td>71.9</td><td>62.9</td><td>52.7</td><td>57.4</td><td class="average-cell">66.5</td><td class="average-cell">63.4</td><td class="average-cell">64.7</td></tr>
+            <tr class="ours-row"><th scope="row">SparseDriveV2 + AutoAgent0</th><td class="sensor-cell" aria-label="RGB input: yes">&#10003;</td><td class="sensor-cell" aria-label="LiDAR input: yes">&#10003;</td><td>79.8</td><td>83.7</td><td>81.7</td><td>78.8</td><td>80.0</td><td>79.4</td><td class="average-cell">79.3<span class="table-gain">(+12.8)</span></td><td class="average-cell">81.9<span class="table-gain">(+18.5)</span></td><td class="average-cell">80.6<span class="table-gain">(+15.9)</span></td></tr>
+            <tr class="expert-row"><th scope="row">BridgeDrive</th><td class="sensor-cell" aria-label="RGB input: yes">&#10003;</td><td class="sensor-cell" aria-label="LiDAR input: yes">&#10003;</td><td>91.6</td><td>95.0</td><td>93.3</td><td>81.9</td><td>75.0</td><td>78.3</td><td class="average-cell">86.8</td><td class="average-cell">85.0</td><td class="average-cell">85.8</td></tr>
+            <tr class="ours-row"><th scope="row">BridgeDrive + AutoAgent0</th><td class="sensor-cell" aria-label="RGB input: yes">&#10003;</td><td class="sensor-cell" aria-label="LiDAR input: yes">&#10003;</td><td>91.7</td><td>95.3</td><td>93.5</td><td>85.7</td><td>85.3</td><td>85.5</td><td class="average-cell">88.7<span class="table-gain">(+1.9)</span></td><td class="average-cell">90.3<span class="table-gain">(+5.3)</span></td><td class="average-cell">89.5<span class="table-gain">(+3.7)</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <div class="results-panel">
+        <div class="panel-heading"><div><span class="overline">FAIL2DRIVE</span><h3>Performance Comparison</h3></div><span class="muted small">Higher is better ↑</span></div>
+        <div class="chart-controls"><div class="segmented" aria-label="Evaluation split"><button type="button" data-split="gen" aria-pressed="true">Generalization</button><button type="button" data-split="id" aria-pressed="false">In-distribution</button><button type="button" data-split="avg" aria-pressed="false">Average</button></div><label class="metric-select">Metric <select id="metric"><option value="0">Driving score</option><option value="1">Success rate (%)</option><option value="2">Harmonic mean</option></select></label></div>
+        <div class="chart-legend"><span><i class="legend-base"></i>Standalone expert</span><span><i class="legend-ours"></i>+ AutoAgent0</span></div>
+        <div id="results-chart" class="results-chart" role="img" aria-label="Driving score comparison on generalization routes"></div>
+        <p class="chart-note" id="chart-note" aria-live="polite"></p>
+      </div>
+      <p class="source-note">100 paired routes · 17 unseen long-tail scenario types · 200 routes total · mean over three matched repetitions.</p>
+      <details class="data-disclosure"><summary>NavSafe-∞ evaluation </summary><div class="table-scroll" tabindex="0" role="region" aria-label="NavSafe results"><table><caption>NavSafe-∞: DS, SR (%), driving efficiency (DE), comfort, and four ability scores. All metrics ↑.</caption><thead><tr><th scope="col">Method</th><th scope="col">DS</th><th scope="col">SR</th><th scope="col">DE</th><th scope="col">Comfort</th><th scope="col">TC</th><th scope="col">VRUC</th><th scope="col">TV</th><th scope="col">TI</th></tr></thead><tbody id="navsafe-body"></tbody></table></div><p class="source-note">TC: traffic crashes · VRUC: vulnerable road user crashes · TV: traffic violations · TI: traffic incidents.</p></details>
+    </section>
+
+    <section id="demonstrations" class="section">
+      <div class="section-heading"><span class="section-number">03 / CLOSED-LOOP DEMONSTRATIONS</span><h2>Closed-loop Demonstrations</h2></div>
+      <div class="scenario-tabs" id="scenario-tabs" aria-label="Driving scenario"></div>
+      <div class="scenario-description" aria-live="polite"><span class="scenario-counter" id="scenario-counter">01 / 07</span><div><h3 id="scenario-title"></h3></div></div>
+      <div class="comparison-grid" id="scenario-videos"></div>
+      <div class="subsection-heading"><h3>Runtime Demonstrations</h3></div>
+      <div class="comparison-grid" id="method-videos"></div>
+    </section>
+
+    <section id="method" class="section">
+      <div class="section-heading"><span class="section-number">04 / METHOD</span><h2>Method</h2></div>
+      <figure class="paper-figure"><button type="button" class="zoomable" data-image="assets/figures/framework.webp" data-caption="AutoAgent0 runtime framework" aria-label="Enlarge AutoAgent0 framework"><img src="assets/figures/framework.webp" alt="AutoAgent0 architecture: environment observations, nominal planning, scene context refinement, a rule-based verifier, and recovery planning." width="1526" height="900" loading="lazy"><span class="zoom-hint">View figure ↗</span></button><figcaption><strong>The AutoAgent0 harness.</strong> Independent scene context supports a rule-based verifier. Nominal and recovery trajectories pass through the same admission checks before reaching the tracking controller.</figcaption></figure>
+      <div class="method-steps" aria-label="Explore runtime stages"><button type="button" data-step="0" aria-pressed="true"><span>01</span> Refine the scene</button><button type="button" data-step="1" aria-pressed="false"><span>02</span> Verify the plan</button><button type="button" data-step="2" aria-pressed="false"><span>03</span> Plan a recovery</button><button type="button" data-step="3" aria-pressed="false"><span>04</span> Adapt & execute</button></div>
+      <div class="method-detail" aria-live="polite"><div class="method-copy"><span class="overline" id="method-kicker"></span><h3 id="method-title"></h3><p id="method-text"></p><div class="method-chips" id="method-chips"></div></div><button type="button" class="zoomable method-image" id="method-image-button" aria-label="Enlarge method illustration"><img id="method-image" src="assets/figures/detection.webp" alt="Camera and LiDAR scene context refinement" loading="lazy"><span class="zoom-hint">View figure ↗</span></button></div>
+      <div class="recovery-rule"><span class="rule-label">EXECUTION RULE</span><div><span>Admitted nominal plan</span><b>→</b><strong>Execute expert trajectory</strong></div><div><span>No nominal plan admitted</span><b>→</b><strong>Search, refine & verify recovery</strong></div><p>If no recovery candidate is admitted before the next control decision, use conservative braking.</p></div>
+      <figure class="paper-figure"><button type="button" class="zoomable" data-image="assets/figures/recovery.webp" data-caption="Agentic recovery planning" aria-label="Enlarge agentic recovery planning"><img src="assets/figures/recovery.webp" alt="Recovery planning: nominal rejection triggers primitive selection and iterative parameter search using collision, progress, and feasibility feedback." width="870" height="440" loading="lazy"><span class="zoom-hint">View figure ↗</span></button><figcaption><strong>Feedback makes recovery adaptive.</strong> Braking, creeping, lateral bypass, and reverse primitives expose bounded continuous parameters. Rejected candidates inform the next proposal; only admitted trajectories are executed.</figcaption></figure>
+    </section>
+
+    <section id="analysis" class="section">
+      <div class="section-heading"><span class="section-number">05 / MORE ANALYSIS</span><h2>Component Analysis</h2></div>
+      <div class="analysis-grid"><article class="analysis-card"><span class="overline">GENERALIZATION GAP</span><h3>Less degradation under shift.</h3><div class="gap-comparison"><div><span>UniAD</span><span>3.5 <b>→ −0.8</b></span></div><div><span>SparseDriveV2</span><span>7.1 <b>→ 1.0</b></span></div><div><span>BridgeDrive</span><span>9.7 <b>→ 7.4</b></span></div></div><p>Gap = in-distribution DS − generalization DS. The reductions accompany improved scores on both splits.</p></article><article class="analysis-card"><span class="overline">RUNTIME COMPARISON</span><h3>Recovering route progress.</h3><div class="monitor-highlight"><strong>75.0<small>%</small></strong><span>Generalization success<br>with AutoAgent0</span></div><p>On the selected monitor-comparison routes, the shared expert reaches 54.2% SR; RSS, MPC, and uncertainty monitors reach 50.0%, 41.7%, and 41.7%.</p><span class="small muted">Separate protocol from the full benchmark.</span></article></div>
+      <details class="data-disclosure"><summary>Runtime monitor comparison <span>Selected Fail2Drive routes</span></summary><div class="table-scroll" tabindex="0" role="region" aria-label="Runtime monitor comparison"><table><caption>Shared SparseDriveV2 expert. Monitor baselines use PDMS arbitration between native and monitor-proposed trajectories.</caption><thead><tr><th scope="col">Runtime</th><th scope="col">ID DS ↑</th><th scope="col">ID SR (%) ↑</th><th scope="col">Gen. DS ↑</th><th scope="col">Gen. SR (%) ↑</th></tr></thead><tbody><tr><th scope="row">SparseDriveV2</th><td>65.833</td><td>58.3</td><td>64.431</td><td>54.2</td></tr><tr><th scope="row">+ RSS</th><td>70.436</td><td>75.0</td><td>62.129</td><td>50.0</td></tr><tr><th scope="row">+ MPC</th><td>68.921</td><td>62.5</td><td>62.174</td><td>41.7</td></tr><tr><th scope="row">+ Uncertainty</th><td>69.299</td><td>66.7</td><td>60.522</td><td>41.7</td></tr><tr class="ours-row"><th scope="row">+ AutoAgent0</th><td>78.098</td><td>75.0</td><td>73.353</td><td>75.0</td></tr></tbody></table></div></details>
+      <details class="data-disclosure"><summary>When should recovery be triggered? <span>Component ablation</span></summary><p>Agentic recovery is disabled; supervised variants share the threshold and controlled fallback. Refinement improves some metrics, but extra semantic supervision does not uniformly help in the current results.</p><div class="table-scroll" tabindex="0" role="region" aria-label="Recovery trigger ablation"><table><caption>Recovery decision ablation. Collision and blockage values are reproduced as reported; interventions/km has no preferred direction.</caption><thead><tr><th scope="col">Variant</th><th scope="col">DS ↑</th><th scope="col">SR ↑</th><th scope="col">Col. ↓</th><th scope="col">Block. ↓</th><th scope="col">Int./km</th></tr></thead><tbody><tr><th scope="row">Nominal planner</th><td>66.48</td><td>63.5</td><td>0.445</td><td>1.92</td><td>0</td></tr><tr><th scope="row">+ Trajectory verification</th><td>73.08</td><td>65.5</td><td>0.235</td><td>4.45</td><td>58.5</td></tr><tr><th scope="row">+ LiDAR detection refinement</th><td>75.32</td><td>73.0</td><td>0.140</td><td>3.95</td><td>62.9</td></tr><tr><th scope="row">+ VLM semantics (full)</th><td>72.36</td><td>68.0</td><td>0.245</td><td>4.74</td><td>64.1</td></tr><tr><th scope="row">GT context (oracle)</th><td>78.67</td><td>77.0</td><td>0.105</td><td>1.30</td><td>47.9</td></tr></tbody></table></div><p class="source-note">Ground-truth context is an oracle analysis, not a sensor-only system.</p></details>
+      <details class="data-disclosure"><summary>Detection refinement <span>Paired perception evaluation</span></summary><p>Before/after predictions are evaluated on the same frames along the deployed refined stack’s trajectories. Improvements in recall and localization coexist with extra false positives.</p><figure class="paper-figure"><button type="button" class="zoomable" data-image="assets/figures/detection.webp" data-caption="Independent scene context refinement" aria-label="Enlarge detection comparison"><img src="assets/figures/detection.webp" alt="A missed obstacle and inaccurate box are refined using LiDAR evidence and a VLM RGB check." loading="lazy"></button><figcaption>Complementary evidence can expose disagreements in the initial scene representation.</figcaption></figure><div class="table-scroll" tabindex="0" role="region" aria-label="Detection quality"><table><caption>Standalone detection quality from the appendix; center error in meters.</caption><thead><tr><th scope="col">Split / output</th><th scope="col">Precision ↑</th><th scope="col">Recall ↑</th><th scope="col">F1 ↑</th><th scope="col">FP/frame ↓</th><th scope="col">FN/frame ↓</th><th scope="col">Center error ↓</th></tr></thead><tbody><tr><th scope="row">ID / before</th><td>0.763</td><td>0.562</td><td>0.647</td><td>1.95</td><td>4.89</td><td>0.498</td></tr><tr><th scope="row">ID / after</th><td>0.717</td><td>0.584</td><td>0.643</td><td>2.58</td><td>4.65</td><td>0.392</td></tr><tr><th scope="row">Long-tail / before</th><td>0.715</td><td>0.647</td><td>0.679</td><td>2.07</td><td>2.82</td><td>0.513</td></tr><tr><th scope="row">Long-tail / after</th><td>0.694</td><td>0.694</td><td>0.694</td><td>2.45</td><td>2.45</td><td>0.327</td></tr></tbody></table></div></details>
+    </section>
+
+    <section id="citation" class="section citation-section">
+      <div class="section-heading"><span class="section-number">06 / CITATION</span><h2>AutoAgent0</h2></div>
+      <div class="citation-box"><div class="citation-toolbar"><span>BibTeX</span><button id="copy-citation" type="button">Copy BibTeX <span aria-hidden="true">⧉</span></button></div><pre><code id="bibtex">@misc{autoagent0,
+  title = {AutoAgent0: An Agentic Runtime for Safe Closed-loop Driving},
+  author = {Anonymous Authors},
+  note = {Research manuscript; publication metadata pending}
+}</code></pre><p class="copy-status" id="copy-status" role="status"></p></div>
+    </section>
+    <footer><a class="brand" href="#top"><img src="assets/figures/AutoAgent0_logo_clean.png" width="30" height="26" alt=""><span>AutoAgent0</span></a><p>Project-page structure inspired by <a href="https://wenlixiao.com/self-improve-VLA-PLD" target="_blank" rel="noopener">Probe, Learn, Distill ↗</a></p><a class="back-top" href="#top">Back to top ↑</a></footer>
+  </main>
+  <dialog id="figure-dialog" aria-labelledby="figure-caption"><div class="dialog-toolbar"><p id="figure-caption"></p><button type="button" id="close-figure" aria-label="Close enlarged figure">✕</button></div><div class="dialog-image"><img id="enlarged-figure" alt=""></div><p class="dialog-hint">Scroll to inspect · Esc to close</p></dialog>
+  <noscript><div class="noscript-note">Enable JavaScript for result charts and video selectors. The method, benchmark tables, and citation remain available below.</div></noscript>
+</body>
+</html>
