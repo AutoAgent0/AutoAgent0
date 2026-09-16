@@ -21,6 +21,16 @@ window.AUTOAGENT = {
     {"id": "animals", "label": "Animals", "title": "Responding to animals on the road", "videos": {"fail1": {"src": "assets/videos/demonstrations/animals_fail1.mp4", "poster": "assets/figures/demonstrations/animals_fail1.png", "posterIsVideoFrame": true, "preload": "none"}, "fail2": {"src": "assets/videos/demonstrations/animals_fail2.mp4", "poster": "assets/figures/demonstrations/animals_fail2.png", "posterIsVideoFrame": true, "preload": "none"}, "success": {"src": "assets/videos/demonstrations/animals_success.mp4", "poster": "assets/figures/demonstrations/animals_success.png", "posterIsVideoFrame": true, "preload": "none"}}},
     {"id": "pedestrian-crowds", "label": "Pedestrian crowds", "title": "Navigating dense pedestrian interactions", "videos": {"fail1": {"src": "assets/videos/demonstrations/pedestrian_crowds_fail1.mp4", "poster": "assets/figures/demonstrations/pedestrian_crowds_fail1.png", "posterIsVideoFrame": true, "preload": "none"}, "fail2": {"src": "assets/videos/demonstrations/pedestrian_crowds_fail2.mp4", "poster": "assets/figures/demonstrations/pedestrian_crowds_fail2.png", "posterIsVideoFrame": true, "preload": "none"}, "success": {"src": "assets/videos/demonstrations/pedestrian_crowds_success.mp4", "poster": "assets/figures/demonstrations/pedestrian_crowds_success.png", "posterIsVideoFrame": true, "preload": "none"}}}
   ],
+  navsafeCases: [
+    { id: 'a', label: 'Case A', title: 'Responding to a stopped vehicle', views: [
+      { title: 'Scene View', src: 'assets/videos/nav-safe/cam_A_03b66343e1ac5d68.mp4', poster: 'assets/videos/nav-safe/cam_A_03b66343e1ac5d68.webp' },
+      { title: 'BEV View', src: 'assets/videos/nav-safe/compare_A_03b66343e1ac5d68.mp4', poster: 'assets/videos/nav-safe/compare_A_03b66343e1ac5d68.webp' }
+    ] },
+    { id: 'b', label: 'Case B', title: 'Staying within the drivable area', views: [
+      { title: 'Scene View', src: 'assets/videos/nav-safe/cam_B_a18d2b32f8415373.mp4', poster: 'assets/videos/nav-safe/cam_B_a18d2b32f8415373.webp' },
+      { title: 'BEV View', src: 'assets/videos/nav-safe/compare_B_a18d2b32f8415373.mp4', poster: 'assets/videos/nav-safe/compare_B_a18d2b32f8415373.webp' }
+    ] }
+  ],
   methodVideos: [
     { id: 'perception', title: 'Scene context refinement', detail: 'Camera + LiDAR + semantic validation. Excerpt from the overview.', src: 'assets/videos/scene-refinement.mp4', poster: 'assets/figures/video-perception.webp', filename: 'scene-refinement.mp4', posterIsVideoFrame: true },
     { id: 'recovery', title: 'Verifier-guided recovery', detail: 'Select → parameterize → verify. Excerpt from the overview.', src: 'assets/videos/recovery-planning.mp4', poster: 'assets/figures/video-recovery.webp', filename: 'recovery-planning.mp4', posterIsVideoFrame: true },

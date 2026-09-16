@@ -95,3 +95,12 @@ pre{font-size:13px}
 [data-theme="dark"] .video-outcome-fail{color:#f08c88}
 
 .video-outcome-success{color:var(--green)}
+
+/* Each NavSafe recording already contains the baseline/ours comparison. */
+.navsafe-panel[hidden]{display:none}
+.navsafe-case-title{font-size:20px;margin:12px 0 20px}
+.navsafe-view{margin-top:18px}
+.navsafe-view .video-card-heading{margin:0}
+.navsafe-view .video-slot,.navsafe-view .video-slot:has(video){aspect-ratio:auto;min-height:0}
+.navsafe-view .video-slot video{height:auto}
+@media(max-width:520px){.navsafe-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.navsafe-case-title{font-size:18px}}

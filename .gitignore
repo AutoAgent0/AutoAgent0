@@ -2,3 +2,6 @@ __pycache__/
 *.py[cod]
 .DS_Store
 Thumbs.db
+
+# NavSafe source GIFs; the website uses MP4 and WebP exports.
+/assets/videos/nav-safe/*.gif

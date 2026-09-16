@@ -43,6 +43,7 @@
     video.controls = true; video.playsInline = true; video.preload = 'auto';
     // Muted inline playback allows autoplay without a prior user gesture.
     video.autoplay = true; video.defaultMuted = true; video.muted = true;
+    video.loop = Boolean(item.loop);
     video.setAttribute('aria-label', item.title);
     const poster = safeURL(item.poster); if (poster) video.poster = poster;
     video.addEventListener('error', () => placeholder(slot, item, true), { once: true });
@@ -161,6 +162,56 @@
     $('#scenario-tabs').append(button);
   });
   if (data.scenarios.length) showScenario(0);
+  const navsafeTabs = [];
+  const navsafePanels = [];
+  function showNavsafe(index) {
+    navsafePanels.forEach((panel, i) => {
+      const selected = i === index;
+      panel.hidden = !selected;
+      navsafeTabs[i].setAttribute('aria-selected', String(selected));
+      navsafeTabs[i].tabIndex = selected ? 0 : -1;
+      if (!selected) $$('video', panel).forEach(video => video.pause());
+    });
+    const panel = navsafePanels[index];
+    const item = data.navsafeCases[index];
+    if (!panel.hasChildNodes()) {
+      const heading = document.createElement('h3');
+      heading.className = 'navsafe-case-title'; heading.textContent = item.title;
+      panel.append(heading);
+      item.views.forEach(view => {
+        const card = document.createElement('article'); card.className = 'video-card navsafe-view';
+        const title = document.createElement('h4'); title.className = 'video-card-heading';
+        title.textContent = view.title; card.append(title);
+        mountVideo(card, { ...view, title: `NavSafe ${item.label} · ${view.title} · SparseDriveV2 and AutoAgent0`, loop: true, posterIsVideoFrame: true });
+        panel.append(card);
+      });
+    } else {
+      $$('video', panel).forEach(video => video.play().catch(() => { /* Native controls remain available. */ }));
+    }
+  }
+  data.navsafeCases.forEach((item, index) => {
+    const tab = document.createElement('button');
+    tab.type = 'button'; tab.id = `navsafe-tab-${item.id}`;
+    tab.setAttribute('role', 'tab'); tab.textContent = item.label;
+    const panel = document.createElement('div');
+    panel.id = `navsafe-panel-${item.id}`; panel.className = 'navsafe-panel'; panel.hidden = true;
+    panel.setAttribute('role', 'tabpanel'); panel.setAttribute('aria-labelledby', tab.id);
+    tab.setAttribute('aria-controls', panel.id);
+    tab.addEventListener('click', () => showNavsafe(index));
+    tab.addEventListener('keydown', event => {
+      let next;
+      if (event.key === 'ArrowRight') next = (index + 1) % navsafeTabs.length;
+      else if (event.key === 'ArrowLeft') next = (index + navsafeTabs.length - 1) % navsafeTabs.length;
+      else if (event.key === 'Home') next = 0;
+      else if (event.key === 'End') next = navsafeTabs.length - 1;
+      else return;
+      event.preventDefault(); showNavsafe(next); navsafeTabs[next].focus();
+    });
+    navsafeTabs.push(tab); navsafePanels.push(panel);
+    $('#navsafe-tabs').append(tab); $('#navsafe-panels').append(panel);
+  });
+  if (navsafeTabs.length) showNavsafe(0);
+
   const runtimeTabs = [];
   const runtimePanels = [];
   function showRuntime(index) {
