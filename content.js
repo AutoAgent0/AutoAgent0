@@ -39,7 +39,7 @@ window.AUTOAGENT = {
     { name: 'UniAD', input: 'RGB', id: [47.5,36.3,41.2], gen: [44.0,27.6,33.9], avg: [45.8,32.0,37.6], expert: true },
     { name: 'UniAD + AutoAgent0', input: 'RGB + LiDAR', id: [68.4,69.0,68.7], gen: [69.2,69.0,69.1], avg: [68.8,69.0,68.9], ours: true },
     { name: 'SparseDriveV2', input: 'RGB + LiDAR', id: [70.0,74.0,71.9], gen: [62.9,52.7,57.4], avg: [66.5,63.4,64.7], expert: true },
-    { name: 'SparseDriveV2 + AutoAgent0', input: 'RGB + LiDAR', id: [79.8,83.7,81.7], gen: [78.8,80.0,79.4], avg: [79.3,81.9,80.6], ours: true },
+    { name: 'SparseDriveV2 + AutoAgent0', input: 'RGB + LiDAR', id: [80.7,85.7,83.1], gen: [79.2,81.0,80.1], avg: [80.0,83.4,81.7], ours: true },
     { name: 'BridgeDrive', input: 'RGB + LiDAR', id: [91.6,95.0,93.3], gen: [81.9,75.0,78.3], avg: [86.8,85.0,85.8], expert: true },
     { name: 'BridgeDrive + AutoAgent0', input: 'RGB + LiDAR', id: [91.7,95.3,93.5], gen: [85.7,85.3,85.5], avg: [88.7,90.3,89.5], ours: true }
   ],
